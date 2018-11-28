@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace GSeoFinalProject
 {
@@ -9,13 +10,22 @@ namespace GSeoFinalProject
     /// </summary>
     public class Game1 : Game
     {
+        internal SpriteBatch spriteBatch;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        List<Rectangle> backgroundList = new List<Rectangle>(); 
+
+
+        public const int WINDOW_WIDTH = 1280;
+        public const int WINDOW_HEIGHT = 981;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //set up window size
+            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
         }
 
         /// <summary>
@@ -27,7 +37,7 @@ namespace GSeoFinalProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            this.Components.Add(new Background(this));
             base.Initialize();
         }
 
@@ -41,6 +51,7 @@ namespace GSeoFinalProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
         }
 
         /// <summary>
@@ -73,10 +84,9 @@ namespace GSeoFinalProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
     }
