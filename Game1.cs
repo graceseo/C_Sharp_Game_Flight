@@ -10,7 +10,7 @@ namespace GSeoFinalProject
     /// </summary>
     public class Game1 : Game
     {
-        internal SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
         GraphicsDeviceManager graphics;
         List<Rectangle> backgroundList = new List<Rectangle>(); 
 
@@ -37,8 +37,40 @@ namespace GSeoFinalProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.Components.Add(new Background(this));
+            StartScene startScene = new StartScene(this);
+            this.Components.Add(startScene);
+            Services.AddService<StartScene>(startScene);
+
+
+            //create other scenes here and add to component list
+            ActionScene actionScene = new ActionScene(this);
+            this.Components.Add(actionScene);
+            Services.AddService<ActionScene>(actionScene);
+
+            HelpScene helpScene = new HelpScene(this);
+            this.Components.Add(helpScene);
+            Services.AddService<HelpScene>(helpScene);
+
+
+
+            //this.Components.Add(new Background(this));
             base.Initialize();
+
+            HideAllScenes();
+            startScene.Show();
+        }
+
+        public void HideAllScenes()
+        {
+            GameScene gs = null;
+            foreach (GameComponent item in Components)
+            {
+                if (item is GameScene)
+                {
+                    gs = (GameScene)item;
+                    gs.Hide();
+                }
+            }
         }
 
         /// <summary>
@@ -51,7 +83,7 @@ namespace GSeoFinalProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
+            Services.AddService<SpriteBatch>(spriteBatch);
         }
 
         /// <summary>
@@ -84,7 +116,7 @@ namespace GSeoFinalProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             base.Draw(gameTime);

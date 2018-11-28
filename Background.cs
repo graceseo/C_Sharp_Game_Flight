@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace GSeoFinalProject
 {
@@ -18,27 +19,6 @@ namespace GSeoFinalProject
             this.game = game;
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            game.spriteBatch.Begin();
-            foreach (Rectangle rect in spaceRects)
-            {
-                game.spriteBatch.Draw(spaceBackground, rect, Color.White);
-
-            }
-            game.spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            UpdateRectPositionInList(spaceRects);
-            UpdatePositions(spaceRects, SPACE_SPEED);
-
-            base.Update(gameTime);
-        }
-
         protected override void LoadContent()
         {
             spaceBackground = game.Content.Load<Texture2D>("background");
@@ -51,6 +31,27 @@ namespace GSeoFinalProject
                                             spaceBackground.Width,
                                             spaceBackground.Height));
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            UpdateRectPositionInList(spaceRects);
+            UpdatePositions(spaceRects, SPACE_SPEED);
+
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            game.spriteBatch.Begin();
+            foreach (Rectangle rect in spaceRects)
+            {
+                game.spriteBatch.Draw(spaceBackground, rect, Color.White);
+
+            }
+            game.spriteBatch.End();
+
+            base.Draw(gameTime);
         }
         private void UpdatePositions(List<Rectangle> rectList, int speed)
         {
