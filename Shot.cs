@@ -10,6 +10,7 @@ namespace GSeoFinalProject
     {
         Game1 game;
         Rectangle rectangle;
+
         Texture2D fighterShot;
         
         public Shot(Game1 game, Vector2 startLocation)

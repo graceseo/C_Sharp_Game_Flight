@@ -8,7 +8,6 @@ namespace GSeoFinalProject
     {
         public HelpScene(Game game) : base(game)
         {
-
         }
 
         public override void Initialize()
@@ -24,7 +23,6 @@ namespace GSeoFinalProject
         {
             if (Enabled)
             {
-
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     game.HideAllScenes();

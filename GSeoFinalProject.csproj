@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ActionScene.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyControl.cs" />
     <Compile Include="Fighter.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Game1.cs" />
@@ -64,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\background.jpg" />
+    <Content Include="Content\enemyBlue.png" />
     <Content Include="Content\enemyShot.png" />
     <Content Include="Content\enemyWhite.png" />
     <Content Include="Content\enemyYellow.png" />

@@ -17,13 +17,13 @@ namespace GSeoFinalProject
 
         Vector2 fighterPosition;
         const int SPEED = 5;
-        List<Shot> fighterShotList;
+        List<Shot> ShotList;
         bool shotEnable = true;
 
         public Fighter(Game1 game) : base(game)
         {
             this.game = game;
-            fighterShotList = new List<Shot>();
+            ShotList = new List<Shot>();
         }
         protected override void LoadContent()
         {
@@ -76,7 +76,7 @@ namespace GSeoFinalProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && shotEnable)
             {
-                fighterShotList.Add(new Shot(game, new Vector2(fighterPosition.X + (fighterIdle.Width-20) / 2, fighterPosition.Y)));
+                ShotList.Add(new Shot(game, new Vector2(fighterPosition.X + (fighterIdle.Width-20) / 2, fighterPosition.Y)));
                 shotEnable = false;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Space))
@@ -84,7 +84,7 @@ namespace GSeoFinalProject
                 shotEnable = true;
             }
 
-            foreach (Shot shot in fighterShotList)
+            foreach (Shot shot in ShotList)
             {
                 shot.Update();
             }
@@ -96,7 +96,7 @@ namespace GSeoFinalProject
         {
             game.spriteBatch.Begin();
             game.spriteBatch.Draw(fighterCurrent, fighterPosition, Color.White);
-            foreach (Shot shot in fighterShotList)
+            foreach (Shot shot in ShotList)
             {
                 shot.Draw(game.spriteBatch);
             }
