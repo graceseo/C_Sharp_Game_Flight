@@ -51,9 +51,6 @@ namespace GSeoFinalProject
             this.Components.Add(helpScene);
             Services.AddService<HelpScene>(helpScene);
 
-
-
-            //this.Components.Add(new Background(this));
             base.Initialize();
 
             HideAllScenes();

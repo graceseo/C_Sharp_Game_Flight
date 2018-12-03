@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,22 +16,40 @@ namespace GSeoFinalProject
         private int SelectedIndex { get; set; }
         private Vector2 position;
 
-        private Color regularColor = Color.Black;
-        private Color hilightColor = Color.Red;
+        private Color regularColor = Color.White;
+        private Color hilightColor = Color.SkyBlue;
 
-        private KeyboardState oldState; // why??
+        private KeyboardState oldState;
+
+        private Texture2D gameLogo;
 
         public MenuComponent(Game game, List<string> menuNames) : base(game)
         {
             this.game = game as Game1;
             menuItems = menuNames;
+        }
 
+        public override void Initialize()
+        {
+            // starting position of the menu items
+            position = new Vector2((GraphicsDevice.Viewport.Width - 300) / 2,
+                                      (GraphicsDevice.Viewport.Height + 250) / 2);
 
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            // load the fonts we will be using for this menu
+            regularFont = game.Content.Load<SpriteFont>("Fonts/regularFont");
+            highlightFont = game.Content.Load<SpriteFont>("Fonts/hilightFont");
+            gameLogo = game.Content.Load<Texture2D>("Images/logoWords");
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            //if (Enabled)
+            if (Enabled)
             {
                 KeyboardState ks = Keyboard.GetState();
                 if (ks.IsKeyDown(Keys.Down) && oldState.IsKeyUp(Keys.Down))
@@ -53,15 +67,13 @@ namespace GSeoFinalProject
                     {
                         SelectedIndex = menuItems.Count - 1;
                     }
-
                 }
                 oldState = ks;
 
-                if (ks.IsKeyDown(Keys.Enter))
+				if (ks.IsKeyDown(Keys.Enter))
                 {
                     SwitchScenesBasedOnSelection();
                 }
-
             }
             base.Update(gameTime);
         }
@@ -97,6 +109,7 @@ namespace GSeoFinalProject
             Vector2 tempPos = position;
 
             sb.Begin();
+            sb.Draw(gameLogo, new Vector2(0, 0)); //draw a game log on this manu compoent
 
             for (int i = 0; i < menuItems.Count; i++)
             {
@@ -110,7 +123,6 @@ namespace GSeoFinalProject
                     activeFont = highlightFont;
                     activeColor = hilightColor;
                 }
-
                 sb.DrawString(activeFont, menuItems[i], tempPos, activeColor);
 
                 // update the position of next string
@@ -122,21 +134,5 @@ namespace GSeoFinalProject
             base.Draw(gameTime);
         }
 
-        public override void Initialize()
-        {
-            // starting position of the menu items
-            position = new Vector2(GraphicsDevice.Viewport.Width / 2,
-                                      GraphicsDevice.Viewport.Height / 2);
-
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            // load the fonts we will be using for this menu
-            regularFont = game.Content.Load<SpriteFont>("Fonts/regularFont");
-            highlightFont = game.Content.Load<SpriteFont>("Fonts/hilightFont");
-            base.LoadContent();
-        }
     }
 }

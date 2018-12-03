@@ -15,9 +15,18 @@ namespace GSeoFinalProject
         public const int MIN_ENEMY_COUNT = 5;
         public const int MAX_ENEMY_COUNT = 20;
 
+        //All emeny has their own serial number, so an enemy can move different way.
+        public int enemySerialNo = 1;
+
+        internal List<Enemy> enemyList;
+        double spwan;
+
+        Random random ;
+
         public ActionScene(Game game) : base(game)
         {
-
+            enemyList = new List<Enemy>();
+            random = new Random();
         }
 
         public override void Initialize()
@@ -36,9 +45,18 @@ namespace GSeoFinalProject
                 {
                     game.HideAllScenes();
                     game.Services.GetService<StartScene>().Show();
-
+                }
+                spwan += gameTime.ElapsedGameTime.TotalSeconds;
+                if (spwan > 3)
+                {
+                    enemyList.Add(new Enemy(game, new Vector2(random.Next(game.GraphicsDevice.Viewport.Width), 0), enemySerialNo));
+                    spwan = 0;
                 }
 
+                foreach (Enemy enemy in enemyList)
+                {
+                    enemy.Update();
+                }
             }
             base.Update(gameTime);
         }

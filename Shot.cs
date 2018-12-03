@@ -11,14 +11,12 @@ namespace GSeoFinalProject
         Game1 game;
         Rectangle rectangle;
         Texture2D fighterShot;
-
-
+        
         public Shot(Game1 game, Vector2 startLocation)
         {
             this.game = game;
             fighterShot = game.Content.Load<Texture2D>("Images/fighterShot");
             rectangle = new Rectangle((int)startLocation.X, (int)startLocation.Y, fighterShot.Width, fighterShot.Height);
-
         }
 
         public void Update()
