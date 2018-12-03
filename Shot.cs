@@ -11,34 +11,34 @@ namespace GSeoFinalProject
         Game1 game;
         Rectangle rectangle;
 
-        Texture2D fighterShot;
+        Texture2D shotTexture;
         
         public Shot(Game1 game, Vector2 startLocation)
         {
             this.game = game;
-            fighterShot = game.Content.Load<Texture2D>("Images/fighterShot");
-            rectangle = new Rectangle((int)startLocation.X, (int)startLocation.Y, fighterShot.Width, fighterShot.Height);
+            shotTexture = game.Content.Load<Texture2D>("Images/fighterShot");
+            rectangle = new Rectangle((int)startLocation.X, (int)startLocation.Y, shotTexture.Width, shotTexture.Height);
         }
 
         public void Update()
         {
             rectangle.Y -= 10;
 
-            //foreach (Meteor meteor in game.meteorList)
-            //{
-            //    if (rectangle.Intersects(meteor.rectangle))
-            //    {
-            //        meteor.Hit();
-            //    }
-            //}
-
+            //loop the static enemyList of EnemyControl Class
+            foreach (Enemy enemy in EnemyControl.enemyList)
+            {
+                if (rectangle.Intersects(enemy.Rectangle))
+                {
+                    enemy.IsHit=true;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (rectangle.Y > fighterShot.Height * -1)
+            if (rectangle.Y > shotTexture.Height * -1)
             {
-                spriteBatch.Draw(fighterShot, rectangle, Color.White);
+                spriteBatch.Draw(shotTexture, rectangle, Color.White);
 
             }
         }

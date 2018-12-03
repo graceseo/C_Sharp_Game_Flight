@@ -17,7 +17,9 @@ namespace GSeoFinalProject
         //All emeny has a serial number, so an enemy can move different way.
         public int enemySerialNo = 1;
 
-        internal List<Enemy> enemyList;
+        //This List shoud be static becuase Shot class check it's isHit variable
+        static public List<Enemy> enemyList;
+
         double spwan;
 
         Random random;

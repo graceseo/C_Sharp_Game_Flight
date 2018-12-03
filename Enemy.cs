@@ -8,17 +8,18 @@ namespace GSeoFinalProject
     {
         Game1 game;
 
-        Rectangle rectangle;
+        private Rectangle rectangle;
         Vector2 enemyPosition;
 
         Texture2D enemyTexture; //current enemy's image
         Texture2D explodedEnemy;
 
-        bool isHit = false;
-        bool isVisual=true;
+        private bool isHit = false;
+        private bool isVisual=true;
 
         int serialNumber; // this enemy's number which will be divided by 3 for it's own way
         int remainder;
+        int timerSinceHit;
 
         Random random = new Random();
 
@@ -34,6 +35,8 @@ namespace GSeoFinalProject
         /// If an enemy is below the bottom of the window, it should be invisible
         /// </summary>
         public bool IsVisual { get => isVisual; set => isVisual = value; }
+        public bool IsHit { get => isHit; set => isHit = value; }
+        public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
 
         /// <summary>
         /// the enemy constructor must get this enemy's serial number.
@@ -60,7 +63,7 @@ namespace GSeoFinalProject
         /// </summary>
         public void Update()
         {
-            if (isHit == false)
+            if (IsHit == false)
             {
                 switch (remainder)
                 {
@@ -89,17 +92,17 @@ namespace GSeoFinalProject
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isHit == false)
+            if (IsHit == false)
             {
                 spriteBatch.Draw(enemyTexture, enemyPosition, Color.White);
             }
             else
             {
-                //timerSinceHit++;
-                //if (timerSinceHit < 60)
-                //{
-                //    spriteBatch.Draw(explodedMeteor, location, Color.White);
-                //}
+                timerSinceHit++;
+                if (timerSinceHit < 30)
+                {
+                    spriteBatch.Draw(explodedEnemy, enemyPosition, Color.White);
+                }
             }
         }
     }
