@@ -30,6 +30,9 @@ namespace GSeoFinalProject
                 if (rectangle.Intersects(enemy.Rectangle))
                 {
                     enemy.IsHit=true;
+                    
+                    //Add score
+
                 }
             }
         }

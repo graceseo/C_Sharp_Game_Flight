@@ -11,6 +11,7 @@ namespace GSeoFinalProject
 
         static public Rectangle rectangle; //for get shot from enemies
         static public bool isHit = false;//for get shot from enemies
+        static public int heart = 3; //for fighter's heart
 
         Texture2D fighterIdle;
         Texture2D fighterLeft;
@@ -45,60 +46,21 @@ namespace GSeoFinalProject
         }
 
         /// <summary>
-        /// This Update method includes Fighter and Shot update.
-        /// When a fighter moves, it shouldn't move into outside this window, 
-        /// so every direction keyboards' action calculate this fighter's position and the window size
+        /// the main Update method.
+        ///It calls FighterUpdate for updating Fighter Character by checking some condistions.
+        ///a fighter only work if it has enough heart and not get hit.
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            if (isHit==false)
+            if (!isHit && heart>0)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Left) && fighterPosition.X > 0)
-                {
-                    fighterCurrent = fighterLeft;
-                    fighterPosition.X -= SPEED;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.Right) && fighterPosition.X < (Game1.WINDOW_WIDTH - fighterIdle.Width))
-                {
-                    fighterCurrent = fighterRight;
-                    fighterPosition.X += SPEED;
-                }
-                else if (Keyboard.GetState().IsKeyUp(Keys.Left))
-                {
-                    fighterCurrent = fighterIdle;
-                }
-                else if (Keyboard.GetState().IsKeyUp(Keys.Right))
-                {
-                    fighterCurrent = fighterIdle;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.Up) && fighterPosition.Y > 0)
-                {
-                    fighterCurrent = fighterIdle;
-                    fighterPosition.Y -= SPEED;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.Down) && fighterPosition.Y < (Game1.WINDOW_HEIGHT - fighterIdle.Height))
-                {
-                    fighterCurrent = fighterIdle;
-                    fighterPosition.Y += SPEED;
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && shotEnable)
-                {
-                    ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 20) / 2, fighterPosition.Y)));
-                    shotEnable = false;
-                }
-                if (Keyboard.GetState().IsKeyUp(Keys.Space))
-                {
-                    shotEnable = true;
-                }
-
-                foreach (FighterShot shot in ShotList)
-                {
-                    shot.Update();
-                }
+                FighterUpdate();
             }
-
+            else if(isHit && heart>0)
+            {
+                FighterUpdate(); //#####################
+            }
             base.Update(gameTime);
         }
 
@@ -106,7 +68,7 @@ namespace GSeoFinalProject
         {
             game.spriteBatch.Begin();
 
-            if (isHit==false)
+            if (!isHit)
             {
                 game.spriteBatch.Draw(fighterCurrent, fighterPosition, Color.White);
                 foreach (FighterShot shot in ShotList)
@@ -124,6 +86,62 @@ namespace GSeoFinalProject
             }
             game.spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// this method is part of the Update method.
+        /// when only a fighter live and is not hit, this method is called.
+        /// When a fighter moves, it shouldn't move into outside this window, 
+        /// so every direction keyboards' action calculate this fighter's position and the window size
+        /// </summary>
+        public void FighterUpdate()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && fighterPosition.X > 0)
+            {
+                fighterCurrent = fighterLeft;
+                fighterPosition.X -= SPEED;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right) && fighterPosition.X < (Game1.WINDOW_WIDTH - fighterIdle.Width))
+            {
+                fighterCurrent = fighterRight;
+                fighterPosition.X += SPEED;
+            }
+            else if (Keyboard.GetState().IsKeyUp(Keys.Left))
+            {
+                fighterCurrent = fighterIdle;
+            }
+            else if (Keyboard.GetState().IsKeyUp(Keys.Right))
+            {
+                fighterCurrent = fighterIdle;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && fighterPosition.Y > 0)
+            {
+                fighterCurrent = fighterIdle;
+                fighterPosition.Y -= SPEED;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down) && fighterPosition.Y < (Game1.WINDOW_HEIGHT - fighterIdle.Height))
+            {
+                fighterCurrent = fighterIdle;
+                fighterPosition.Y += SPEED;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && shotEnable)
+            {
+                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width -90), fighterPosition.Y)));
+                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width-20), fighterPosition.Y)));
+                shotEnable = false;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                shotEnable = true;
+            }
+            //if ractagle is not updated, intersect doesn't work
+            rectangle.X = (int)fighterPosition.X;
+            rectangle.Y = (int)fighterPosition.Y;
+
+            foreach (FighterShot shot in ShotList)
+            {
+                shot.Update();
+            }
         }
     }
 }

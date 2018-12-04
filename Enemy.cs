@@ -62,7 +62,7 @@ namespace GSeoFinalProject
             enemyTexture = game.Content.Load<Texture2D>("Images/"+textureName);
 
             rectangle = new Rectangle((int)startposition.X, (int)startposition.Y, enemyTexture.Width, enemyTexture.Height);
-            remainder = serialNumber % 3; //find the remainder
+            remainder = serialNumber % 3; //find the remainder for ramdom
             ShotList = new List<EnemyShot>();
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace GSeoFinalProject
         /// </summary>
         public void Update()
         {
-            if (IsHit == false)
+            if (!IsHit)
             {
                 switch (remainder)
                 {
@@ -85,6 +85,7 @@ namespace GSeoFinalProject
                 }
                 enemyPosition.Y += 1f; //all enemy will get down
                 rectangle.X = (int)enemyPosition.X;
+                rectangle.Y = (int)enemyPosition.Y;
 
                 // if this enemy's location is outside the window, remainder should be changed to opposite way
                 if (enemyPosition.X <= 0)
@@ -96,8 +97,9 @@ namespace GSeoFinalProject
                     remainder = 1;
                 }
 
+                //this If statement controls enemy's spwan
                 timeShotWait++;
-                if (timeShotWait > 20) // spwan
+                if (timeShotWait > 40)
                 {
                     ShotList.Add(new EnemyShot(game, new Vector2(enemyPosition.X + (enemyTexture.Width - 20) / 2, (enemyPosition.Y + enemyTexture.Height-20))));
                     timeShotWait = 0;
@@ -110,7 +112,7 @@ namespace GSeoFinalProject
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (IsHit == false)
+            if (!IsHit)
             {
                 spriteBatch.Draw(enemyTexture, enemyPosition, Color.White);
                 foreach (EnemyShot shot in ShotList)
@@ -121,7 +123,7 @@ namespace GSeoFinalProject
             else
             {
                 timerSinceHit++;
-                if (timerSinceHit < 30)
+                if (timerSinceHit < 40)
                 {
                     spriteBatch.Draw(explodedEnemy, enemyPosition, Color.White);
                 }
