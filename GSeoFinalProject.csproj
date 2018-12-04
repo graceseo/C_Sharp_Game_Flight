@@ -44,6 +44,7 @@
     <Compile Include="ActionScene.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyControl.cs" />
+    <Compile Include="EnemyShot.cs" />
     <Compile Include="Fighter.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Game1.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="MenuComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shot.cs" />
+    <Compile Include="FighterShot.cs" />
     <Compile Include="StartScene.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,7 @@
     <Content Include="Content\enemyWhite.png" />
     <Content Include="Content\enemyYellow.png" />
     <Content Include="Content\fighter.png" />
+    <Content Include="Content\fighterExplosion.png" />
     <Content Include="Content\fighterLeft.png" />
     <Content Include="Content\fighterRight.png" />
     <Content Include="Content\fighterShot.png" />

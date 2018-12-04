@@ -40,7 +40,7 @@ namespace GSeoFinalProject
             if (Enabled)
             {
                 spwan += gameTime.ElapsedGameTime.TotalSeconds;
-                if (spwan > 2.5)
+                if (spwan > 3)
                 {
                     enemyList.Add(new Enemy(game, new Vector2(random.Next(game.GraphicsDevice.Viewport.Width - 5), 0), enemySerialNo));
                     enemySerialNo += 1;

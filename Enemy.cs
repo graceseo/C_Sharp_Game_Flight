@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
 {
@@ -20,6 +23,9 @@ namespace GSeoFinalProject
         int serialNumber; // this enemy's number which will be divided by 3 for it's own way
         int remainder;
         int timerSinceHit;
+        int timeShotWait;
+
+        List<EnemyShot> ShotList;
 
         Random random = new Random();
 
@@ -57,6 +63,7 @@ namespace GSeoFinalProject
 
             rectangle = new Rectangle((int)startposition.X, (int)startposition.Y, enemyTexture.Width, enemyTexture.Height);
             remainder = serialNumber % 3; //find the remainder
+            ShotList = new List<EnemyShot>();
         }
         /// <summary>
         /// enemies move by 3 different way by using Modulus opereator
@@ -88,6 +95,17 @@ namespace GSeoFinalProject
                 {
                     remainder = 1;
                 }
+
+                timeShotWait++;
+                if (timeShotWait > 20) // spwan
+                {
+                    ShotList.Add(new EnemyShot(game, new Vector2(enemyPosition.X + (enemyTexture.Width - 20) / 2, (enemyPosition.Y + enemyTexture.Height-20))));
+                    timeShotWait = 0;
+                }
+                foreach (EnemyShot shot in ShotList)
+                {
+                    shot.Update();
+                }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -95,6 +113,10 @@ namespace GSeoFinalProject
             if (IsHit == false)
             {
                 spriteBatch.Draw(enemyTexture, enemyPosition, Color.White);
+                foreach (EnemyShot shot in ShotList)
+                {
+                    shot.Draw(game.spriteBatch);
+                }
             }
             else
             {

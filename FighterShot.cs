@@ -6,14 +6,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
 {
-    class Shot
+    class FighterShot
     {
         Game1 game;
         Rectangle rectangle;
 
         Texture2D shotTexture;
-        
-        public Shot(Game1 game, Vector2 startLocation)
+
+        public FighterShot(Game1 game, Vector2 startLocation)
         {
             this.game = game;
             shotTexture = game.Content.Load<Texture2D>("Images/fighterShot");
