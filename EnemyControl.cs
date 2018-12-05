@@ -14,11 +14,11 @@ namespace GSeoFinalProject
     {
         Game1 game;
         
+        //This List shoud be static becuase Shot class check it's isHit variable
+        static internal List<Enemy> enemyList;
+
         //All emeny has a serial number, so an enemy can move different way.
         public int enemySerialNo = 1;
-
-        //This List shoud be static becuase Shot class check it's isHit variable
-        static public List<Enemy> enemyList;
 
         double spwan;
 

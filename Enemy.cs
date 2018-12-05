@@ -104,6 +104,13 @@ namespace GSeoFinalProject
                     ShotList.Add(new EnemyShot(game, new Vector2(enemyPosition.X + (enemyTexture.Width - 20) / 2, (enemyPosition.Y + enemyTexture.Height-50))));
                     timeShotWait = 0;
                 }
+
+                // if an enemy collide the fighter, the fighter's heart should reduce
+                if (rectangle.Intersects(Fighter.rectangle))
+                {
+                    Fighter.isHit = true;
+                }
+
                 foreach (EnemyShot shot in ShotList)
                 {
                     shot.Update();

@@ -12,7 +12,7 @@ namespace GSeoFinalProject
     public class ActionScene : GameScene
     {
         //when the fighter is dead, the fighter class will change gameOver variable true.
-        static public bool gameOver = false;
+        static internal bool gameOver = false;
         public ActionScene(Game game) : base(game)
         {
         }
