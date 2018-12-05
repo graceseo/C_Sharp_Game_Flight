@@ -12,8 +12,8 @@ namespace GSeoFinalProject
     {
         public SpriteBatch spriteBatch;
         GraphicsDeviceManager graphics;
-        List<Rectangle> backgroundList = new List<Rectangle>(); 
-
+        List<Rectangle> backgroundList = new List<Rectangle>();
+        static public bool gameOver = false;
 
         public const int WINDOW_WIDTH = 1280;
         public const int WINDOW_HEIGHT = 981;
@@ -51,6 +51,10 @@ namespace GSeoFinalProject
             this.Components.Add(helpScene);
             Services.AddService<HelpScene>(helpScene);
 
+            EndGameScene endScene = new EndGameScene(this);
+            this.Components.Add(endScene);
+            Services.AddService<EndGameScene>(endScene);
+
             base.Initialize();
 
             HideAllScenes();
@@ -69,7 +73,6 @@ namespace GSeoFinalProject
                 }
             }
         }
-
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.

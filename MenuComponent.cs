@@ -109,7 +109,7 @@ namespace GSeoFinalProject
             Vector2 tempPos = position;
 
             sb.Begin();
-            sb.Draw(gameLogo, new Vector2(0, 0)); //draw a game log on this manu compoent
+            sb.Draw(gameLogo, new Vector2(0, 0)); //to draw a game logo on this manu compoent
 
             for (int i = 0; i < menuItems.Count; i++)
             {

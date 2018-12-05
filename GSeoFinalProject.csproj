@@ -42,6 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActionScene.cs" />
+    <Compile Include="EndGameScene.cs" />
+    <Compile Include="EndGameTextComponent.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyControl.cs" />
     <Compile Include="EnemyShot.cs" />
@@ -66,20 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\background.jpg" />
-    <Content Include="Content\enemyBlue.png" />
-    <Content Include="Content\enemyShot.png" />
-    <Content Include="Content\enemyWhite.png" />
-    <Content Include="Content\enemyYellow.png" />
-    <Content Include="Content\fighter.png" />
-    <Content Include="Content\fighterExplosion.png" />
-    <Content Include="Content\fighterLeft.png" />
-    <Content Include="Content\fighterRight.png" />
-    <Content Include="Content\fighterShot.png" />
-    <Content Include="Content\largeExplosion.png" />
-    <Content Include="Content\smallExplosion.png" />
-    <Content Include="Content\soloEnemyBig.png" />
-    <Content Include="Content\solorEnemySmall.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

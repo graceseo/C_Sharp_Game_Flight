@@ -8,23 +8,26 @@ namespace GSeoFinalProject
     class Fighter : DrawableGameComponent
     {
         Game1 game;
+        const int SPEED = 5;
 
         static public Rectangle rectangle; //for get shot from enemies
-        static public bool isHit = false;//for get shot from enemies
-        static public int heart = 3; //for fighter's heart
+        static public bool isHit=false;//for get shot from enemies
+        static public int heartCount=2; //for fighter's heart
 
         Texture2D fighterIdle;
         Texture2D fighterLeft;
         Texture2D fighterRight;
         Texture2D fighterCurrent;
         Texture2D fighterExpload;
+        Texture2D heart;
 
         Vector2 fighterPosition;
-        const int SPEED = 5;
+
         List<FighterShot> ShotList;
         bool shotEnable = true;
 
         int timerSinceHit;
+        int timeShotWait;
 
         public Fighter(Game1 game) : base(game)
         {
@@ -37,11 +40,17 @@ namespace GSeoFinalProject
             fighterLeft = game.Content.Load<Texture2D>("Images/fighterLeft");
             fighterRight = game.Content.Load<Texture2D>("Images/fighterRight");
             fighterExpload = game.Content.Load<Texture2D>("Images/fighterExplosion");
+            fighterCurrent = fighterIdle;
+
+            heart = game.Content.Load<Texture2D>("Images/fighterHeart");
+
+            
 
             fighterPosition = new Vector2(GraphicsDevice.Viewport.Width / 2 - fighterIdle.Width / 2,
                                         GraphicsDevice.Viewport.Height - fighterIdle.Height);
-            fighterCurrent = fighterIdle;
+            
             rectangle = new Rectangle((int)fighterPosition.X, (int)fighterPosition.Y, fighterCurrent.Width, fighterCurrent.Height);
+
             base.LoadContent();
         }
 
@@ -53,20 +62,46 @@ namespace GSeoFinalProject
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            if (!isHit && heart>0)
+            if (!isHit && heartCount > 0)
             {
                 FighterUpdate();
             }
-            else if(isHit && heart>0)
+            else if (isHit && heartCount > 0)
             {
-                FighterUpdate(); //#####################
+                ///following part is to delay heart deleting and the fighter explosion
+                ///if it didn't delay, heart deleting and the fighter explosion disappeared so fast 
+                timeShotWait++;
+                if (timeShotWait > 25)
+                {
+                    isHit = false;
+                    heartCount-=1;
+                    timeShotWait = 0;
+                }
+                FighterUpdate();
+            }
+            else //the fighter got hit and heart is zero, the Fighter is dead.
+            {
+                ActionScene.gameOver = true;
             }
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            Vector2 heartPosition = new Vector2(0, 0);
             game.spriteBatch.Begin();
+
+            //if heartCount is 0, this For statement will not work
+            if (heartCount>0)
+            {
+                game.spriteBatch.Draw(heart, heartPosition, null, Color.White);
+
+                for (int i = 1; i <heartCount; i++)
+                {
+                    heartPosition.X += heart.Width;
+                    game.spriteBatch.Draw(heart, heartPosition, null, Color.White);
+                }
+            }
 
             if (!isHit)
             {
@@ -79,7 +114,7 @@ namespace GSeoFinalProject
             else
             {
                 timerSinceHit++;
-                if (timerSinceHit < 30)
+                if (timerSinceHit <40)
                 {
                     game.spriteBatch.Draw(fighterExpload, fighterPosition, Color.White);
                 }
@@ -126,8 +161,8 @@ namespace GSeoFinalProject
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && shotEnable)
             {
-                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width -90), fighterPosition.Y)));
-                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width-20), fighterPosition.Y)));
+                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 90), fighterPosition.Y)));
+                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 20), fighterPosition.Y)));
                 shotEnable = false;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Space))

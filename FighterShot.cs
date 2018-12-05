@@ -36,7 +36,6 @@ namespace GSeoFinalProject
                 }
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             if (rectangle.Y > shotTexture.Height * -1)

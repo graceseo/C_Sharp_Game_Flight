@@ -99,9 +99,9 @@ namespace GSeoFinalProject
 
                 //this If statement controls enemy's spwan
                 timeShotWait++;
-                if (timeShotWait > 40)
+                if (timeShotWait > 60)
                 {
-                    ShotList.Add(new EnemyShot(game, new Vector2(enemyPosition.X + (enemyTexture.Width - 20) / 2, (enemyPosition.Y + enemyTexture.Height-20))));
+                    ShotList.Add(new EnemyShot(game, new Vector2(enemyPosition.X + (enemyTexture.Width - 20) / 2, (enemyPosition.Y + enemyTexture.Height-50))));
                     timeShotWait = 0;
                 }
                 foreach (EnemyShot shot in ShotList)
