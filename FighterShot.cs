@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GSeoFinalProject
 {
@@ -30,9 +31,9 @@ namespace GSeoFinalProject
                 if (rectangle.Intersects(enemy.Rectangle))
                 {
                     enemy.IsHit=true;
-                    
-                    //Add score
 
+                    //An enemy is killed by just one shot
+                    Score.currentScore=+Score.scoreWeight;
                 }
             }
         }

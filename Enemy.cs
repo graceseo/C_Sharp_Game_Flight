@@ -4,6 +4,7 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GSeoFinalProject
 {
@@ -16,6 +17,8 @@ namespace GSeoFinalProject
 
         Texture2D enemyTexture; //current enemy's image
         Texture2D explodedEnemy;
+
+        SoundEffect explosionFX;
 
         private bool isHit = false;
         private bool isVisual=true;
@@ -60,6 +63,8 @@ namespace GSeoFinalProject
             explodedEnemy = game.Content.Load<Texture2D>("Images/smallExplosion");
             string textureName = enemyType[random.Next(enemyType.Length)];
             enemyTexture = game.Content.Load<Texture2D>("Images/"+textureName);
+
+            explosionFX = game.Content.Load<SoundEffect>("Sounds/enemyExplosion");
 
             rectangle = new Rectangle((int)startposition.X, (int)startposition.Y, enemyTexture.Width, enemyTexture.Height);
             remainder = serialNumber % 3; //find the remainder for ramdom
@@ -132,6 +137,7 @@ namespace GSeoFinalProject
                 timerSinceHit++;
                 if (timerSinceHit < 40)
                 {
+                    explosionFX.Play(0.005f,0,0);
                     spriteBatch.Draw(explodedEnemy, enemyPosition, Color.White);
                 }
             }

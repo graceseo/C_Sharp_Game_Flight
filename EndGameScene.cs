@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
 {
+    /// <summary>
+    /// When the fighter is died, this class call the startSchen
+    /// </summary>
     public class EndGameScene : GameScene
     {
         public EndGameScene(Game game) : base(game)
@@ -25,6 +28,7 @@ namespace GSeoFinalProject
                 {
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
+                        ActionScene.restart = true;
                         game.HideAllScenes();
                         game.Services.GetService<StartScene>().Show();
                     }
@@ -32,7 +36,5 @@ namespace GSeoFinalProject
             }
             base.Update(gameTime);
         }
-
-
     }
 }

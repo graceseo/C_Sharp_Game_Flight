@@ -238,3 +238,27 @@
 /processorParam:TextureFormat=Color
 /build:Images/background.jpg
 
+#begin Sounds/backgroundSound.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/backgroundSound.mp3
+
+#begin Sounds/fighterShot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/fighterShot.wav
+
+#begin Sounds/enemyExplosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enemyExplosion.wav
+
+#begin Sounds/fighterExplosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/fighterExplosion.wav
+

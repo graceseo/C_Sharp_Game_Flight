@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GSeoFinalProject
 {
@@ -9,10 +10,11 @@ namespace GSeoFinalProject
     {
         Game1 game;
         const int SPEED = 5;
+        const int HEART_COUNT = 2;
 
         static public Rectangle rectangle; //for get shot from enemies
-        static public bool isHit=false;//for get shot from enemies
-        static public int heartCount=2; //for fighter's heart
+        static public bool isHit = false;//for get shot from enemies
+        static public int heartCount= HEART_COUNT; //for fighter's heart
 
         Texture2D fighterIdle;
         Texture2D fighterLeft;
@@ -20,6 +22,9 @@ namespace GSeoFinalProject
         Texture2D fighterCurrent;
         Texture2D fighterExpload;
         Texture2D heart;
+
+        SoundEffect shotFX;
+        SoundEffect explosionFX;
 
         Vector2 fighterPosition;
 
@@ -40,11 +45,10 @@ namespace GSeoFinalProject
             fighterLeft = game.Content.Load<Texture2D>("Images/fighterLeft");
             fighterRight = game.Content.Load<Texture2D>("Images/fighterRight");
             fighterExpload = game.Content.Load<Texture2D>("Images/fighterExplosion");
-            fighterCurrent = fighterIdle;
-
+            shotFX = game.Content.Load<SoundEffect>("Sounds/fighterShot");
+            explosionFX= game.Content.Load<SoundEffect>("Sounds/fighterExplosion");
             heart = game.Content.Load<Texture2D>("Images/fighterHeart");
-
-            
+            fighterCurrent = fighterIdle;
 
             fighterPosition = new Vector2(GraphicsDevice.Viewport.Width / 2 - fighterIdle.Width / 2,
                                         GraphicsDevice.Viewport.Height - fighterIdle.Height);
@@ -62,6 +66,8 @@ namespace GSeoFinalProject
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            if (isHit) explosionFX.Play(0.007f,0,0);
+
             if (!isHit && heartCount > 0)
             {
                 FighterUpdate();
@@ -74,14 +80,14 @@ namespace GSeoFinalProject
                 if (timeShotWait > 25)
                 {
                     isHit = false;
-                    heartCount-=1;
+                    heartCount -= 1;
                     timeShotWait = 0;
                 }
                 FighterUpdate();
             }
             else //the fighter got hit and heart is zero, the Fighter is dead.
             {
-                ActionScene.gameOver = true;
+                FighterDied();
             }
             base.Update(gameTime);
         }
@@ -124,6 +130,19 @@ namespace GSeoFinalProject
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void FighterDied()
+        {
+            //ActionScene is updating every gametime, so this variable can be caught by ActionScene.
+            ActionScene.gameOver = true;
+
+            //Clear all
+            heartCount = HEART_COUNT;
+            isHit = false;
+        }
+
+        /// <summary>
         /// this method is part of the Update method.
         /// when only a fighter live and is not hit, this method is called.
         /// When a fighter moves, it shouldn't move into outside this window, 
@@ -163,6 +182,8 @@ namespace GSeoFinalProject
             {
                 ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 90), fighterPosition.Y)));
                 ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 20), fighterPosition.Y)));
+
+                shotFX.Play(0.09f,0.1f,0.1f);
                 shotEnable = false;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Space))

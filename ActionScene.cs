@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GSeoFinalProject
 {
@@ -13,16 +10,17 @@ namespace GSeoFinalProject
     {
         //when the fighter is dead, the fighter class will change gameOver variable true.
         static internal bool gameOver = false;
+        static internal bool restart = false;
         public ActionScene(Game game) : base(game)
         {
         }
 
-        public override void Initialize()
-        {
-             // create and add any components that belong to this scene
+        public override void Initialize() {
+            // create and add any components that belong to this scene
             this.SceneComponents.Add(new Background(game));
             this.SceneComponents.Add(new Fighter(game));
             this.SceneComponents.Add(new EnemyControl(game));
+
             base.Initialize();
         }
 
@@ -34,6 +32,12 @@ namespace GSeoFinalProject
         {
             if (Enabled)
             {
+                //clear enemy --for restart game
+                if (restart)
+                {
+                    EnemyControl.enemyList.Clear();
+                    restart = false;
+                }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     game.HideAllScenes();
@@ -42,6 +46,8 @@ namespace GSeoFinalProject
                 {
                     game.HideAllScenes();
                     game.Services.GetService<EndGameScene>().Show();
+
+                    gameOver = false; 
                 }
             }
             base.Update(gameTime);

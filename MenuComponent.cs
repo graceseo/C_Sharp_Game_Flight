@@ -85,6 +85,7 @@ namespace GSeoFinalProject
             switch ((MenuSelection)SelectedIndex)
             {
                 case MenuSelection.StartGame:
+
                     game.Services.GetService<ActionScene>().Show();
                     break;
                 case MenuSelection.Help:

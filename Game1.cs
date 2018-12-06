@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Media;
 
 namespace GSeoFinalProject
 {
@@ -12,6 +13,9 @@ namespace GSeoFinalProject
     {
         public SpriteBatch spriteBatch;
         GraphicsDeviceManager graphics;
+
+        Song backgroundMusic;
+
         List<Rectangle> backgroundList = new List<Rectangle>();
         static public bool gameOver = false;
 
@@ -40,7 +44,6 @@ namespace GSeoFinalProject
             StartScene startScene = new StartScene(this);
             this.Components.Add(startScene);
             Services.AddService<StartScene>(startScene);
-
 
             //create other scenes here and add to component list
             ActionScene actionScene = new ActionScene(this);
@@ -84,6 +87,12 @@ namespace GSeoFinalProject
 
             // TODO: use this.Content to load your game content here
             Services.AddService<SpriteBatch>(spriteBatch);
+
+            backgroundMusic=Content.Load<Song>("Sounds/backgroundSound");
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundMusic);
+
         }
 
         /// <summary>
