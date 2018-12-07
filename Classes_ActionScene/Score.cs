@@ -17,7 +17,6 @@ namespace GSeoFinalProject
 
         SpriteFont scoreWords;
         Vector2 scorePosition;
-        List<int> scoreList = new List<int>();
 
         public int CurrentScore { get => currentScore; set => currentScore = value; }
 

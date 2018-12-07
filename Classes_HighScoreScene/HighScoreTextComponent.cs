@@ -4,26 +4,31 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
 {
-    class EndGameTextComponent : DrawableGameComponent
+    class HighScoreTextComponent : DrawableGameComponent
     {
         Game1 game;
-        Texture2D gameOver;
+
+        SpriteFont notificationFont;
+
+        string pressWord = "Press ESC key....";
 
         private Vector2 position;
-        public EndGameTextComponent(Game game) : base(game)
+        public HighScoreTextComponent(Game game) : base(game)
         {
             this.game = game as Game1;
         }
+
+
         public override void Initialize()
         {
-            position = new Vector2((GraphicsDevice.Viewport.Width -500) / 2,
-                          (GraphicsDevice.Viewport.Height-200) / 2);
+            position = new Vector2((GraphicsDevice.Viewport.Width - 300) / 2,
+                          (GraphicsDevice.Viewport.Height + 400) / 2);
 
             base.Initialize();
         }
         protected override void LoadContent()
         {
-            gameOver=game.Content.Load<Texture2D>("Images/gameOver");
+            notificationFont = game.Content.Load<SpriteFont>("Fonts/notificationFont");
             base.LoadContent();
         }
         public override void Draw(GameTime gameTime)
@@ -31,7 +36,7 @@ namespace GSeoFinalProject
             SpriteBatch spriteBatch = game.Services.GetService<SpriteBatch>();
 
             spriteBatch.Begin();
-            spriteBatch.Draw(gameOver, position, Color.White);
+            spriteBatch.DrawString(notificationFont, pressWord, position, Color.Black);
             spriteBatch.End();
 
             base.Draw(gameTime);

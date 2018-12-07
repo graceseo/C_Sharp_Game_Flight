@@ -95,7 +95,10 @@ namespace GSeoFinalProject
                     game.Exit();
                     break;
                 case MenuSelection.HighScore:
+
                 case MenuSelection.About:
+                    game.Services.GetService<AboutScene>().Show();
+                    break;
                 default:
                     // for now there is nothing handling the other options
                     // we will simply show this screen again

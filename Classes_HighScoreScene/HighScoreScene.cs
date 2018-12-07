@@ -7,16 +7,15 @@ namespace GSeoFinalProject
     /// <summary>
     /// When the fighter is died, this class call the startSchen
     /// </summary>
-    public class EndGameScene : GameScene
+    public class HighScoreScene : GameScene
     {
-        public EndGameScene(Game game) : base(game)
+        public HighScoreScene(Game game) : base(game)
         {
         }
 
         public override void Initialize()
         {
-            this.SceneComponents.Add(new Background(game));
-            this.SceneComponents.Add(new EndGameTextComponent(game));
+            this.SceneComponents.Add(new HighScoreTextComponent(game));
             this.Hide();
             base.Initialize();
         }
@@ -25,12 +24,12 @@ namespace GSeoFinalProject
         {
             if (Enabled)
             {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        game.GameRestart = true;
-                        game.HideAllScenes();
-                        game.Services.GetService<StartScene>().Show();
-                    }
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    game.GameRestart = true;
+                    game.HideAllScenes();
+                    game.Services.GetService<StartScene>().Show();
+                }
             }
             base.Update(gameTime);
         }

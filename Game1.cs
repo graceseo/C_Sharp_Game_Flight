@@ -58,6 +58,10 @@ namespace GSeoFinalProject
             this.Components.Add(helpScene);
             Services.AddService<HelpScene>(helpScene);
 
+            AboutScene aboutScene = new AboutScene(this);
+            this.Components.Add(aboutScene);
+            Services.AddService<AboutScene>(aboutScene);
+
             EndGameScene endScene = new EndGameScene(this);
             this.Components.Add(endScene);
             Services.AddService<EndGameScene>(endScene);
