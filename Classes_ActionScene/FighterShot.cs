@@ -10,13 +10,16 @@ namespace GSeoFinalProject
     class FighterShot
     {
         Game1 game;
+        Score score;
         Rectangle rectangle;
+        int test = 0;
 
         Texture2D shotTexture;
 
-        public FighterShot(Game1 game, Vector2 startLocation)
+        public FighterShot(Game1 game, Score score, Vector2 startLocation)
         {
             this.game = game;
+            this.score = score;
             shotTexture = game.Content.Load<Texture2D>("Images/fighterShot");
             rectangle = new Rectangle((int)startLocation.X, (int)startLocation.Y, shotTexture.Width, shotTexture.Height);
         }
@@ -25,15 +28,23 @@ namespace GSeoFinalProject
         {
             rectangle.Y -= 10;
 
-            //loop the static enemyList of EnemyControl Class
-            foreach (Enemy enemy in EnemyControl.enemyList)
+            ////loop the static enemyList of EnemyControl Class
+            //foreach (Enemy enemy in EnemyControl.enemyList)
+            //{
+            //    if (rectangle.Intersects(enemy.Rectangle))
+            //    {
+            //        enemy.EnemyDied();
+            //        enemy.IsHit=true;
+            //        test++;
+            //    }
+            //}
+            for (int i=0; i<EnemyControl.enemyList.Count; i++)
             {
-                if (rectangle.Intersects(enemy.Rectangle))
+                if (rectangle.Intersects(EnemyControl.enemyList[i].Rectangle))
                 {
-                    enemy.IsHit=true;
-
-                    //An enemy is killed by just one shot
-                    Score.currentScore=+Score.scoreWeight;
+                    EnemyControl.enemyList[i].IsHit = true;
+                    EnemyControl.enemyList.RemoveAt(i);
+                    score.CurrentScore += 100;
                 }
             }
         }

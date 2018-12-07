@@ -11,7 +11,6 @@ namespace GSeoFinalProject
     class Enemy
     {
         Game1 game;
-
         private Rectangle rectangle;
         Vector2 enemyPosition;
 
@@ -27,6 +26,7 @@ namespace GSeoFinalProject
         int remainder;
         int timerSinceHit;
         int timeShotWait;
+        private int scoreValue=100;
 
         List<EnemyShot> ShotList;
 
@@ -46,6 +46,10 @@ namespace GSeoFinalProject
         public bool IsVisual { get => isVisual; set => isVisual = value; }
         public bool IsHit { get => isHit; set => isHit = value; }
         public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
+        public int ScoreValue { get => scoreValue; }
+
+        ////event handler for enemy's death
+        //public event EventHandler EnemyDied;
 
         /// <summary>
         /// the enemy constructor must get this enemy's serial number.
@@ -141,6 +145,10 @@ namespace GSeoFinalProject
                     spriteBatch.Draw(explodedEnemy, enemyPosition, Color.White);
                 }
             }
+        }
+        public void EnemyDied()
+        {
+            rectangle=new Rectangle(0, 0, 0, 0);
         }
     }
 }

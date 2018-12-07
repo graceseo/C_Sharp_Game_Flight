@@ -27,7 +27,6 @@ namespace GSeoFinalProject
             base.Initialize();
         }
         protected override void LoadContent()
-
         {
             notificationFont = game.Content.Load<SpriteFont>("Fonts/notificationFont");
             base.LoadContent();

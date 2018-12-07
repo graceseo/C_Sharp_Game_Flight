@@ -17,10 +17,14 @@ namespace GSeoFinalProject
         Song backgroundMusic;
 
         List<Rectangle> backgroundList = new List<Rectangle>();
-        static public bool gameOver = false;
+        private bool gameOver = false;
+        private bool gameRestart = false;
 
         public const int WINDOW_WIDTH = 1280;
         public const int WINDOW_HEIGHT = 981;
+
+        public bool GameOver { get => gameOver; set => gameOver = value; }
+        public bool GameRestart { get => gameRestart; set => gameRestart = value; }
 
         public Game1()
         {

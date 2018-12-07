@@ -8,17 +8,16 @@ namespace GSeoFinalProject
 {
     public class ActionScene : GameScene
     {
-        //when the fighter is dead, the fighter class will change gameOver variable true.
-        static internal bool gameOver = false;
-        static internal bool restart = false;
-        public ActionScene(Game game) : base(game)
+        Score score;
+        public ActionScene(Game1 game) : base(game)
         {
+            score = new Score(game);
         }
 
         public override void Initialize() {
             // create and add any components that belong to this scene
             this.SceneComponents.Add(new Background(game));
-            this.SceneComponents.Add(new Fighter(game));
+            this.SceneComponents.Add(new Fighter(game, score));
             this.SceneComponents.Add(new EnemyControl(game));
 
             base.Initialize();
@@ -33,21 +32,24 @@ namespace GSeoFinalProject
             if (Enabled)
             {
                 //clear enemy --for restart game
-                if (restart)
+                if (game.GameRestart)
                 {
                     EnemyControl.enemyList.Clear();
-                    restart = false;
+                    score.CurrentScore = 0;
+                    game.GameRestart = false;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     game.HideAllScenes();
                     game.Services.GetService<StartScene>().Show();
-                }else if (gameOver==true)
+
+                }else if (game.GameOver==true)
                 {
                     game.HideAllScenes();
+                    //store score 
                     game.Services.GetService<EndGameScene>().Show();
 
-                    gameOver = false; 
+                    game.GameOver = false; 
                 }
             }
             base.Update(gameTime);

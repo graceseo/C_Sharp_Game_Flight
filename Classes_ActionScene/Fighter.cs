@@ -9,12 +9,14 @@ namespace GSeoFinalProject
     class Fighter : DrawableGameComponent
     {
         Game1 game;
+        Score score;
+
         const int SPEED = 5;
         const int HEART_COUNT = 2;
 
         static public Rectangle rectangle; //for get shot from enemies
         static public bool isHit = false;//for get shot from enemies
-        static public int heartCount= HEART_COUNT; //for fighter's heart
+        public int heartCount= HEART_COUNT; //for fighter's heart
 
         Texture2D fighterIdle;
         Texture2D fighterLeft;
@@ -34,9 +36,10 @@ namespace GSeoFinalProject
         int timerSinceHit;
         int timeShotWait;
 
-        public Fighter(Game1 game) : base(game)
+        public Fighter(Game1 game, Score score) : base(game)
         {
             this.game = game;
+            this.score = score;
             ShotList = new List<FighterShot>();
         }
         protected override void LoadContent()
@@ -66,6 +69,7 @@ namespace GSeoFinalProject
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            //This effect sound is playing if the fighter get shot
             if (isHit) explosionFX.Play(0.007f,0,0);
 
             if (!isHit && heartCount > 0)
@@ -96,6 +100,7 @@ namespace GSeoFinalProject
         {
             Vector2 heartPosition = new Vector2(0, 0);
             game.spriteBatch.Begin();
+            score.Draw(game.spriteBatch);
 
             //if heartCount is 0, this For statement will not work
             if (heartCount>0)
@@ -135,7 +140,7 @@ namespace GSeoFinalProject
         public void FighterDied()
         {
             //ActionScene is updating every gametime, so this variable can be caught by ActionScene.
-            ActionScene.gameOver = true;
+            game.GameOver = true;
 
             //Clear all
             heartCount = HEART_COUNT;
@@ -180,8 +185,8 @@ namespace GSeoFinalProject
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && shotEnable)
             {
-                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 90), fighterPosition.Y)));
-                ShotList.Add(new FighterShot(game, new Vector2(fighterPosition.X + (fighterIdle.Width - 20), fighterPosition.Y)));
+                ShotList.Add(new FighterShot(game, score, new Vector2(fighterPosition.X + (fighterIdle.Width - 90), fighterPosition.Y)));
+                ShotList.Add(new FighterShot(game, score, new Vector2(fighterPosition.X + (fighterIdle.Width - 20), fighterPosition.Y)));
 
                 shotFX.Play(0.09f,0.1f,0.1f);
                 shotEnable = false;

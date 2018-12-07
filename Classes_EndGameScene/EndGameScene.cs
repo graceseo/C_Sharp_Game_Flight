@@ -24,15 +24,12 @@ namespace GSeoFinalProject
         {
             if (Enabled)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                {
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
-                        ActionScene.restart = true;
+                        game.GameRestart = true;
                         game.HideAllScenes();
                         game.Services.GetService<StartScene>().Show();
                     }
-                }
             }
             base.Update(gameTime);
         }
