@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
+using System.IO;
 
 namespace GSeoFinalProject
 {
@@ -13,6 +14,10 @@ namespace GSeoFinalProject
     {
         public SpriteBatch spriteBatch;
         GraphicsDeviceManager graphics;
+
+        public StreamWriter scoreWriter = null;
+        public StreamReader scoreReader = null;
+        public string filename = @"HighScore.txt";
 
         Song backgroundMusic;
 

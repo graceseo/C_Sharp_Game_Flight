@@ -47,9 +47,11 @@ namespace GSeoFinalProject
                 }else if (game.GameOver==true)
                 {
                     game.HideAllScenes();
-                    //store score 
-                    game.Services.GetService<EndGameScene>().Show();
 
+                    //store a score
+                    score.SaveScore();
+
+                    game.Services.GetService<EndGameScene>().Show();
                     game.GameOver = false; 
                 }
             }
