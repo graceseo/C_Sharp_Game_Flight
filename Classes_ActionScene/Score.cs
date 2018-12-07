@@ -26,12 +26,12 @@ namespace GSeoFinalProject
             this.game = game;
             scorePosition = new Vector2((game.GraphicsDevice.Viewport.Width - 200),0);
 
-            scoreWords = game.Content.Load<SpriteFont>("Fonts/hilightFont");
+            scoreWords = game.Content.Load<SpriteFont>("Fonts/regularFont");
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(scoreWords, currentScore.ToString(), scorePosition, Color.White);
         }
-            //to compare other high score in a file
+        //to compare other high score in a file
     }
 }

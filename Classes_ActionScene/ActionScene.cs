@@ -32,10 +32,11 @@ namespace GSeoFinalProject
             if (Enabled)
             {
                 //clear enemy --for restart game
-                if (game.GameRestart)
+                if (game.GameRestart==true)
                 {
-                    EnemyControl.enemyList.Clear();
-                    score.CurrentScore = 0;
+                    EnemyControl.enemyList.Clear(); //all enemy is removed.
+                    score.CurrentScore = 0; // score is zero
+
                     game.GameRestart = false;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))

@@ -14,7 +14,7 @@ namespace GSeoFinalProject
     {
         Game1 game;
         
-        //This List shoud be static becuase Shot class check it's isHit variable
+        //This List shoud be static becuase Shot class check it's isHit variable, and when an enemy got hit, that enemy will be removed.
         static internal List<Enemy> enemyList;
 
         //All emeny has a serial number, so an enemy can move different way.

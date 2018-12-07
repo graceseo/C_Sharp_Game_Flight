@@ -12,7 +12,6 @@ namespace GSeoFinalProject
         Game1 game;
         Score score;
         Rectangle rectangle;
-        int test = 0;
 
         Texture2D shotTexture;
 
@@ -28,23 +27,14 @@ namespace GSeoFinalProject
         {
             rectangle.Y -= 10;
 
-            ////loop the static enemyList of EnemyControl Class
-            //foreach (Enemy enemy in EnemyControl.enemyList)
-            //{
-            //    if (rectangle.Intersects(enemy.Rectangle))
-            //    {
-            //        enemy.EnemyDied();
-            //        enemy.IsHit=true;
-            //        test++;
-            //    }
-            //}
             for (int i=0; i<EnemyControl.enemyList.Count; i++)
             {
+                //if the fighter's shot hit en enemy, this enemy must be removed from enemyList.
                 if (rectangle.Intersects(EnemyControl.enemyList[i].Rectangle))
                 {
                     EnemyControl.enemyList[i].IsHit = true;
                     EnemyControl.enemyList.RemoveAt(i);
-                    score.CurrentScore += 100;
+                    score.CurrentScore += 100; //score 100 is fixed
                 }
             }
         }
