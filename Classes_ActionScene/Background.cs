@@ -21,7 +21,7 @@ namespace GSeoFinalProject
 
         protected override void LoadContent()
         {
-            spaceBackground = game.Content.Load<Texture2D>("background");
+            spaceBackground = game.Content.Load<Texture2D>("Images/background");
 
             int colCount = GraphicsDevice.Viewport.Height / spaceBackground.Height + 1;
             for (int i = 0; i < colCount; i++)

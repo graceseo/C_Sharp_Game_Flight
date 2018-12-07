@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,7 +8,6 @@ namespace GSeoFinalProject
     {
         public HelpScene(Game game) : base(game)
         {
-
         }
 
         public override void Initialize()
@@ -29,7 +23,6 @@ namespace GSeoFinalProject
         {
             if (Enabled)
             {
-
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     game.HideAllScenes();

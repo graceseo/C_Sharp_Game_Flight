@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
 {
-    public class ActionScene : GameScene
+    public class AboutScene : GameScene
     {
-        public ActionScene(Game game) : base(game)
+        public AboutScene(Game game) : base(game)
         {
-
         }
 
         public override void Initialize()
         {
-            // create and add any components that belong to this scene
+            // create and add any components that belong to 
+            // this scene to the Scene components list
             this.SceneComponents.Add(new Background(game));
-            this.SceneComponents.Add(new Airplain(game));
+            this.SceneComponents.Add(new AboutTextComponent(game));
+            this.Hide();
             base.Initialize();
         }
 
@@ -36,6 +32,7 @@ namespace GSeoFinalProject
             }
             base.Update(gameTime);
         }
+
 
     }
 }
