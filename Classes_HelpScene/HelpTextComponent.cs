@@ -34,7 +34,7 @@ namespace GSeoFinalProject
 
         protected override void LoadContent()
         {
-            //texture = game.Content.Load<Texture2D>("Images/helpImage");
+           // texture = game.Content.Load<Texture2D>("Images/helpImage");
             base.LoadContent();
         }
     }

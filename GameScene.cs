@@ -98,7 +98,6 @@ namespace GSeoFinalProject
                 {
                     game.Components.Add(component);
                 }
-
             }
 
             base.Initialize();
