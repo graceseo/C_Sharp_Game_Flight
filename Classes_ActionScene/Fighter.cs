@@ -12,7 +12,7 @@ namespace GSeoFinalProject
         Score score;
 
         const int SPEED = 5;
-        const int HEART_COUNT = 2;
+        const int HEART_COUNT = 3;
 
         static public Rectangle rectangle; //for get shot from enemies
         static public bool isHit = false;//for get shot from enemies

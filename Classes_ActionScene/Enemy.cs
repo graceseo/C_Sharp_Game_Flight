@@ -20,13 +20,11 @@ namespace GSeoFinalProject
         SoundEffect explosionFX;
 
         private bool isHit = false;
-        private bool isVisual=true;
 
         int serialNumber; // this enemy's number which will be divided by 3 for it's own way
         int remainder;
         int timerSinceHit;
         int timeShotWait;
-        private int scoreValue=100;
 
         List<EnemyShot> ShotList;
 
@@ -43,13 +41,8 @@ namespace GSeoFinalProject
         /// <summary>
         /// If an enemy is below the bottom of the window, it should be invisible
         /// </summary>
-        public bool IsVisual { get => isVisual; set => isVisual = value; }
         public bool IsHit { get => isHit; set => isHit = value; }
         public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
-        public int ScoreValue { get => scoreValue; }
-
-        ////event handler for enemy's death
-        //public event EventHandler EnemyDied;
 
         /// <summary>
         /// the enemy constructor must get this enemy's serial number.
@@ -139,16 +132,12 @@ namespace GSeoFinalProject
             else
             {
                 timerSinceHit++;
-                if (timerSinceHit < 40)
+                if (timerSinceHit < 50)
                 {
                     explosionFX.Play(0.005f,0,0);
                     spriteBatch.Draw(explodedEnemy, enemyPosition, Color.White);
                 }
             }
-        }
-        public void EnemyDied()
-        {
-            rectangle=new Rectangle(0, 0, 0, 0);
         }
     }
 }

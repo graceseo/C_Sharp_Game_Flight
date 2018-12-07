@@ -23,17 +23,19 @@ namespace GSeoFinalProject
             rectangle = new Rectangle((int)startLocation.X, (int)startLocation.Y, shotTexture.Width, shotTexture.Height);
         }
 
+        /// <summary>
+        ///A shot's Y moves down
+        ///if the fighter's shot hit en enemy which is not hit, the fighter get score
+        /// </summary>
         public void Update()
         {
             rectangle.Y -= 10;
 
             for (int i=0; i<EnemyControl.enemyList.Count; i++)
             {
-                //if the fighter's shot hit en enemy, this enemy must be removed from enemyList.
-                if (rectangle.Intersects(EnemyControl.enemyList[i].Rectangle))
+                if (rectangle.Intersects(EnemyControl.enemyList[i].Rectangle) && EnemyControl.enemyList[i].IsHit==false)
                 {
                     EnemyControl.enemyList[i].IsHit = true;
-                    EnemyControl.enemyList.RemoveAt(i);
                     score.CurrentScore += 100; //score 100 is fixed
                 }
             }
