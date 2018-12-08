@@ -34,7 +34,7 @@ namespace GSeoFinalProject
         bool shotEnable = true;
 
         int timerSinceHit;
-        int timeShotWait;
+        int timerShotWait;
 
         public Fighter(Game1 game, Score score) : base(game)
         {
@@ -56,7 +56,7 @@ namespace GSeoFinalProject
             fighterPosition = new Vector2(GraphicsDevice.Viewport.Width / 2 - fighterIdle.Width / 2,
                                         GraphicsDevice.Viewport.Height - fighterIdle.Height);
             
-            rectangle = new Rectangle((int)fighterPosition.X, (int)fighterPosition.Y, fighterCurrent.Width, fighterCurrent.Height);
+            rectangle = new Rectangle((int)fighterPosition.X, (int)fighterPosition.Y, fighterCurrent.Width-3, fighterCurrent.Height-3);
 
             base.LoadContent();
         }
@@ -80,12 +80,12 @@ namespace GSeoFinalProject
             {
                 ///following part is to delay heart deleting and the fighter explosion
                 ///if it didn't delay, heart deleting and the fighter explosion disappeared so fast 
-                timeShotWait++;
-                if (timeShotWait > 25)
+                timerShotWait++;
+                if (timerShotWait > 25)
                 {
                     isHit = false;
                     heartCount -= 1;
-                    timeShotWait = 0;
+                    timerShotWait = 0;
                 }
                 FighterUpdate();
             }
@@ -125,7 +125,7 @@ namespace GSeoFinalProject
             else
             {
                 timerSinceHit++;
-                if (timerSinceHit <40)
+                if (timerSinceHit <30)
                 {
                     game.spriteBatch.Draw(fighterExpload, fighterPosition, Color.White);
                 }

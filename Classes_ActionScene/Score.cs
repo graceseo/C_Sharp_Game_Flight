@@ -68,18 +68,10 @@ namespace GSeoFinalProject
                 //Convert scores in String to  Int
                 sortedScore = storedScore.ConvertAll(int.Parse);
 
+                sortedScore.Add(currentScore);
                 sortedScore.Sort();
 
-                //check Stored Scores are 5, and the lowest score is less than a current socre
-                if (sortedScore.Count>=maxNumberScores && sortedScore[0]<currentScore)
-                {
-                    sortedScore.RemoveAt(0);
-                    sortedScore.Add(currentScore);
-
-                }else if (sortedScore.Count<maxNumberScores)
-                {
-                    sortedScore.Add(currentScore);
-                }
+                sortedScore.Reverse();
             }
         }
 
@@ -120,22 +112,12 @@ namespace GSeoFinalProject
             }
             else
             {
-                foreach (int scores in sortedScore)
+                for (int i = 0; i < maxNumberScores&& i<=storedScore.Count; i++)
                 {
-                    game.scoreWriter.WriteLine(scores.ToString());
+                    game.scoreWriter.WriteLine(sortedScore[i].ToString());
                 }
+                
             }
         }
-
-        //// Open the file to read from.
-        //using (StreamReader sr = File.OpenText(game.filename))
-        //{
-        //    string s = "";
-        //    while ((s = sr.ReadLine()) != null)
-        //    {
-        //        Console.WriteLine(s);
-        //    }
-        //}
-
     }
 }

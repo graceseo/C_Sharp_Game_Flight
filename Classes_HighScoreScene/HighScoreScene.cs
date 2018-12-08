@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
 namespace GSeoFinalProject
@@ -15,6 +18,7 @@ namespace GSeoFinalProject
 
         public override void Initialize()
         {
+            this.SceneComponents.Add(new Background(game));
             this.SceneComponents.Add(new HighScoreTextComponent(game));
             this.Hide();
             base.Initialize();

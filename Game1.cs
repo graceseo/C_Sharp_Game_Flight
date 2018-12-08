@@ -71,6 +71,10 @@ namespace GSeoFinalProject
             this.Components.Add(endScene);
             Services.AddService<EndGameScene>(endScene);
 
+            HighScoreScene highScoreScene = new HighScoreScene(this);
+            this.Components.Add(highScoreScene);
+            Services.AddService<HighScoreScene>(highScoreScene);
+
             base.Initialize();
 
             HideAllScenes();

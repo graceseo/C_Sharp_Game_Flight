@@ -48,7 +48,7 @@ namespace GSeoFinalProject
                 //rockSpwan variable controls how often an enemy occur
                 rockSpwan += gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (rockSpwan > 7)
+                if (rockSpwan > 8)
                 {
                     Rock rock = new Rock(game, new Vector2(random.Next(game.GraphicsDevice.Viewport.Width - 10), 30));
                     rockList.Add(rock);
