@@ -135,7 +135,7 @@ namespace GSeoFinalProject
         }
 
         /// <summary>
-        /// 
+        /// to clear all such as heart count, Hit count for restarting a game.
         /// </summary>
         public void FighterDied()
         {

@@ -6,6 +6,10 @@ using System;
 
 namespace GSeoFinalProject
 {
+    /// <summary>
+    /// the background image is scrolling vertically.
+    /// ActionScene, HighScoreScene, and EndGameScene include this class.
+    /// </summary>
     public class Background : DrawableGameComponent
     {
         Game1 game;
@@ -53,6 +57,11 @@ namespace GSeoFinalProject
 
             base.Draw(gameTime);
         }
+        /// <summary>
+        /// It moves all rectangle's position down.
+        /// </summary>
+        /// <param name="rectList"></param>
+        /// <param name="speed"></param>
         private void UpdatePositions(List<Rectangle> rectList, int speed)
         {
             for (int i = 0; i < rectList.Count; i++)
@@ -63,6 +72,11 @@ namespace GSeoFinalProject
             }
         }
 
+        /// <summary>
+        /// Every game time, this method checks and adds a background image's rectagle
+        /// </summary>
+        /// <param name="rectList"></param>
+        /// <param name="offset"></param>
         private void UpdateRectPositionInList(List<Rectangle> rectList, int offset = 0)
         {
             Rectangle firstRect = rectList[0];

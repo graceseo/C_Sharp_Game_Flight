@@ -27,6 +27,11 @@ namespace GSeoFinalProject
             base.LoadContent();
         }
 
+        /// <summary>
+        /// if the right key is down, the next page will shows.
+        /// and the left key is down, a previous page will show.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Right))

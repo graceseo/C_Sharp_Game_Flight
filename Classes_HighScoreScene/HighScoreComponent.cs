@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace GSeoFinalProject
 {
+    /// <summary>
+    /// It loads a high score file to show scores
+    /// </summary>
     class HighScoreTextComponent : DrawableGameComponent
     {
         Game1 game;
@@ -40,6 +43,10 @@ namespace GSeoFinalProject
             base.LoadContent();
         }
 
+        /// <summary>
+        /// to find a file for high scores and add scores into a LIST variable if a file exsits.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             storedScore.Clear();
@@ -64,6 +71,11 @@ namespace GSeoFinalProject
             }
             base.Update(gameTime);
         }
+
+        /// <summary>
+        /// to show scores from a LIST variable.  
+        /// </summary>
+        /// <param name="gameTime"></param>
 
         public override void Draw(GameTime gameTime)
         {
