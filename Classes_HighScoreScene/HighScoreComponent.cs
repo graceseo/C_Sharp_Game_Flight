@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -44,15 +43,24 @@ namespace GSeoFinalProject
         public override void Update(GameTime gameTime)
         {
             storedScore.Clear();
-            if (File.Exists(game.filename))
+            try
             {
-                //Add stored scores to List
-                game.scoreReader = new StreamReader(game.filename);
-                while (!game.scoreReader.EndOfStream)
+                if (File.Exists(game.filename))
                 {
-                    storedScore.Add(game.scoreReader.ReadLine());
+                    //Add stored scores to List
+                    game.scoreReader = new StreamReader(game.filename);
+                    while (!game.scoreReader.EndOfStream)
+                    {
+                        storedScore.Add(game.scoreReader.ReadLine());
+                    }
+                    game.scoreReader.Close();
                 }
-                game.scoreReader.Close();
+            }
+            catch (Exception ex)
+            {
+                //if there is any error, this component will be closed and go start page.
+                game.HideAllScenes();
+                game.Services.GetService<StartScene>().Show();
             }
             base.Update(gameTime);
         }

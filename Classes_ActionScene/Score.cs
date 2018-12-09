@@ -54,24 +54,33 @@ namespace GSeoFinalProject
         /// </summary>
         public void CompareScore()
         {
-            //if a file doesn't exist or sotred socred are less than 5, comparing doesn't need
-            if (File.Exists(game.filename))
+            try
             {
-                //Add stored scores to List
-                game.scoreReader = new StreamReader(game.filename);
-                while (!game.scoreReader.EndOfStream)
+                //if a file doesn't exist or sotred socred are less than 5, comparing doesn't need
+                if (File.Exists(game.filename))
                 {
-                    storedScore.Add(game.scoreReader.ReadLine());
+                    //Add stored scores to List
+                    game.scoreReader = new StreamReader(game.filename);
+                    while (!game.scoreReader.EndOfStream)
+                    {
+                        storedScore.Add(game.scoreReader.ReadLine());
+                    }
+                    game.scoreReader.Close();
+
+                    //Convert scores in String to  Int
+                    sortedScore = storedScore.ConvertAll(int.Parse);
+
+                    sortedScore.Add(currentScore);
+                    sortedScore.Sort();
+
+                    sortedScore.Reverse();
                 }
-                game.scoreReader.Close();
-
-                //Convert scores in String to  Int
-                sortedScore = storedScore.ConvertAll(int.Parse);
-
-                sortedScore.Add(currentScore);
-                sortedScore.Sort();
-
-                sortedScore.Reverse();
+            }
+            catch (Exception ex)
+            {
+                //if there is any error, this component will be closed and go start page.
+                game.HideAllScenes();
+                game.Services.GetService<StartScene>().Show();
             }
         }
 
@@ -81,21 +90,30 @@ namespace GSeoFinalProject
         public void OpenFile()
         {
             bool isNewFile = false;
-            if (!File.Exists(game.filename))
+
+            try
             {
-                isNewFile = true;
-                // Create a file to write to
-                using (game.scoreWriter = File.CreateText(game.filename))
+                if (!File.Exists(game.filename))
                 {
+                    isNewFile = true;
+                    // Create a file to write to
+                    using (game.scoreWriter = File.CreateText(game.filename))
+                    {
+                        WriteScore(isNewFile);
+                    }
+                }
+                else
+                {
+                    isNewFile = false;
+                    // if a file exists just write
+                    game.scoreWriter = new StreamWriter(game.filename);
                     WriteScore(isNewFile);
                 }
-            }
-            else
+            }catch(Exception ex)
             {
-                isNewFile = false;
-                // if a file exists just write
-                game.scoreWriter = new StreamWriter(game.filename);
-                WriteScore(isNewFile);
+                //if there is any error, this component will be closed and go start page.
+                game.HideAllScenes();
+                game.Services.GetService<StartScene>().Show();
             }
             game.scoreWriter.Close();
         }
@@ -106,17 +124,25 @@ namespace GSeoFinalProject
         /// </summary>
         public void WriteScore(bool isNewFile)
         {
-            if (isNewFile == true)
+            try
             {
-                game.scoreWriter.WriteLine(currentScore.ToString());
-            }
-            else
-            {
-                for (int i = 0; i < maxNumberScores&& i<=storedScore.Count; i++)
+                if (isNewFile == true)
                 {
-                    game.scoreWriter.WriteLine(sortedScore[i].ToString());
+                    game.scoreWriter.WriteLine(currentScore.ToString());
                 }
-                
+                else
+                {
+                    for (int i = 0; i < maxNumberScores && i <= storedScore.Count; i++)
+                    {
+                        game.scoreWriter.WriteLine(sortedScore[i].ToString());
+                    }
+
+                }
+            }catch(Exception ex)
+            {
+                //if there is any error, this component will be closed and go start page.
+                game.HideAllScenes();
+                game.Services.GetService<StartScene>().Show();
             }
         }
     }

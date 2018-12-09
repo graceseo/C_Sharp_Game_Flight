@@ -78,7 +78,7 @@
     <Compile Include="Classes_ActionScene\EnemyControl.cs" />
     <Compile Include="Classes_ActionScene\EnemyShot.cs" />
     <Compile Include="Classes_ActionScene\Fighter.cs" />
-    <Compile Include="Classes_ActionScene\Background.cs" />
+    <Compile Include="Background.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="Classes_HelpScene\HelpScene.cs" />
