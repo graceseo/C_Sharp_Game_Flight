@@ -95,7 +95,8 @@ namespace GSeoFinalProject
                     game.Exit();
                     break;
                 case MenuSelection.HighScore:
-
+                    game.Services.GetService<HighScoreScene>().Show();
+                    break;
                 case MenuSelection.About:
                     game.Services.GetService<AboutScene>().Show();
                     break;

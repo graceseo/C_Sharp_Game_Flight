@@ -34,7 +34,7 @@ namespace GSeoFinalProject
             rectangle.Y = (int)rockPosition.Y;
 
             // if an rock collide the fighter, the fighter's heart should reduce
-            if (rectangle.Intersects(Fighter.rectangle))
+            if (rectangle.Intersects(Fighter.rectangle) && Fighter.isHit == false)
             {
                 Fighter.isHit = true;
             }

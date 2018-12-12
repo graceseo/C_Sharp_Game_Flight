@@ -108,7 +108,7 @@ namespace GSeoFinalProject
                 }
 
                 // if an enemy collide the fighter, the fighter's heart should reduce
-                if (rectangle.Intersects(Fighter.rectangle))
+                if (rectangle.Intersects(Fighter.rectangle) && Fighter.isHit == false)
                 {
                     Fighter.isHit = true;
                 }
